@@ -17,3 +17,28 @@ def calc_cube(x):
 calc_cube(5: <class 'int'>)
 """
 
+from functools import wraps
+
+
+def type_logger(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        n = []
+        for el in args:
+            n.append(f"{func.__name__}({el}: {type(el)})")
+        for el in kwargs:
+            n.append(f"{func.__name__}({el}: {type(kwargs[el])})")
+        print(*n, sep=", ")
+
+    return wrapper
+
+
+@type_logger
+def calc_cube(x):
+    return x ** 3
+
+
+a = calc_cube(5, type_logger, "adshgfh", ["f", "h"], True, a=54, b=22.54, fff="ggf")
+
+print(calc_cube.__name__)
