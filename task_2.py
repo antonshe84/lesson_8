@@ -24,3 +24,36 @@ parsed_raw = ('188.138.60.101', '17/May/2015:08:05:49 +0000', 'GET', '/downloads
  для них уточнить регулярное выражение?
 """
 
+import re
+
+# ------ Задание 1 -------
+def email_parse(email_address):
+    email_valid = re.compile(r'([a-z0-9_.-]+)\@([a-z]+\.[a-z]+)', flags=re.IGNORECASE)
+    if email_valid.match(email_address):
+        res = email_valid.findall(email_address)[0]
+        return {"username": res[0], "domain": res[1]}
+    else:
+        raise ValueError("Not e-mail.")
+
+
+email1 = "ansdf-sds.organiz@facebook.com"
+email2 = "ansdf-sds.organiz@facebookcom"
+try:
+    print(email_parse(email1))
+    print(email_parse(email2))
+except ValueError as exc:
+    print("e-mail valid")
+print()
+
+
+# ------ Задание 2 -------
+def parse_data(st):
+    RE_PARSE = re.compile(r"[a-z0-9.+:/]+", flags=re.IGNORECASE)
+    p_l = RE_PARSE.findall(st)
+    return p_l[0], p_l[1] + p_l[2], p_l[3], p_l[4], p_l[7], p_l[8]
+
+
+with open("nginx_logs.txt", "r", encoding="utf-8") as f:
+    for s in f:
+        print(parse_data(s))
+
