@@ -26,9 +26,10 @@ parsed_raw = ('188.138.60.101', '17/May/2015:08:05:49 +0000', 'GET', '/downloads
 
 import re
 
+
 # ------ Задание 1 -------
 def email_parse(email_address):
-    email_valid = re.compile(r'([a-z0-9_.-]+)\@([a-z]+\.[a-z]+)', flags=re.IGNORECASE)
+    email_valid = re.compile(r'([a-z0-9_.-]+)@([a-z]+\.[a-z]+)', flags=re.IGNORECASE)
     if email_valid.match(email_address):
         res = email_valid.findall(email_address)[0]
         return {"username": res[0], "domain": res[1]}
@@ -56,4 +57,3 @@ def parse_data(st):
 with open("nginx_logs.txt", "r", encoding="utf-8") as f:
     for s in f:
         print(parse_data(s))
-

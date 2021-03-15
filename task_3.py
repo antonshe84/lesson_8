@@ -21,7 +21,6 @@ from functools import wraps
 
 
 def type_logger(func):
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         n = []
@@ -39,6 +38,7 @@ def calc_cube(x):
     return x ** 3
 
 
-a = calc_cube(5, type_logger, "adshgfh", ["f", "h"], True, a=54, b=22.54, fff="ggf")
+a = calc_cube(5, type_logger, "word", ["f", "h"], True, a=54, b=22.54, fff="ggf")
 
 print(calc_cube.__name__)
+
